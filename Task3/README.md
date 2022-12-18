@@ -27,6 +27,8 @@ terraform apply
 
 Now you will need to navigate to the public IP address to configure your Moodle
 
+<h2>[My URL](http://18.156.193.39/)</h1>
+
 
 
 
