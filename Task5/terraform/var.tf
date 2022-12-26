@@ -1,3 +1,3 @@
-variable "ssh_username" {
+variable "username" {
   default = ""
 }
