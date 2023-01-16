@@ -10,14 +10,11 @@ Start by updating the package list using the following command:
 ```
 sudo apt update
 ```
-<hr>
 
 Use the following command to install pip for Python 3:
 ```
 sudo apt install python3-pip
 ```
-
-<hr>
 
 Command to install Ansible:
 ```
@@ -30,8 +27,6 @@ Clone the repository to local storage:
 ``` 
 git clone https://github.com/yurakorabel/DevOps_GL_Hometask.git
 ```
-
-<hr>
 
 Go to the directory we need:
 ```
@@ -57,10 +52,13 @@ Now it remains to launch our playbook:
 ansible-playbook playbook.yml
 ```
 
+<hr>
 
 We can observe when the playbook is successfully launched
 
 ![image](https://user-images.githubusercontent.com/55669434/212770772-0030bb13-8b25-4b82-b766-be41164cbd24.png)
+
+<hr>
 
 Hardening check:
 
