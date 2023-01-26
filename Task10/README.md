@@ -94,17 +94,5 @@ Add a private network to the container:
 sudo docker network connect private public-ubuntu
 ```
 
-Checking networks:
-```
-sudo docker network inspect private
-```
-![image](https://user-images.githubusercontent.com/55669434/214878562-ef07936a-1c64-4c8a-baab-0c20b4757231.png)
-
-```
-sudo docker network inspect public
-```
-![image](https://user-images.githubusercontent.com/55669434/214878707-8a276909-757c-481e-9727-2f23bc5f4eac.png)
-
-
 
 
