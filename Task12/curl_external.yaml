@@ -8,5 +8,5 @@ spec:
       containers:
       - name: job-curl-nodeport
         image: curlimages/curl:latest
-        command: ['sh', '-c', 'curl http://34.68.63.220:80/']
+        command: ['sh', '-c', 'curl http://34.68.63.220:300001/']
       restartPolicy: OnFailure
