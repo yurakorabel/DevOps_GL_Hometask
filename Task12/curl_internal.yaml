@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-curl-clusterip
+spec:
+  template:
+    spec:
+      containers:
+      - name: job-curl-clusterip
+        image: curlimages/curl:latest
+        command: ['sh', '-c', 'curl http://10.96.1.1:80/']
+      restartPolicy: OnFailure
