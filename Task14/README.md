@@ -55,6 +55,8 @@ Result:
 
 ![image](https://user-images.githubusercontent.com/55669434/218341361-672ec245-0408-4805-b0b2-ae3470ea36a2.png)
 
+<hr>
+
 ### Task 2
 
 Create and deploy a custom chart for the Pacman game on a Kubernetes cluster using Helm.
@@ -68,6 +70,8 @@ helm install pacman-game pacman-game/
 ### [Website](http://yurakorabel.dynv6.net/):
 
 ![image](https://user-images.githubusercontent.com/55669434/218341651-0785f121-f50c-4599-9fff-9158d864bae0.png)
+
+<hr>
 
 ### Task 3
 
@@ -110,6 +114,7 @@ kubectl apply -f mern/ingress.yaml
 
 ![image](https://user-images.githubusercontent.com/55669434/218342434-645010d5-0497-498a-8c66-16c3789007d4.png)
 
+<hr>
 
 In conclusion, the task involves deploying various applications on a Kubernetes cluster using Helm, including Nginx, a custom chart for the Pacman game, and the MERN stack. It highlights the benefits of using Helm in deployment and management of applications.
 
