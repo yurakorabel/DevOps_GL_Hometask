@@ -4,6 +4,10 @@ This task involves deploying Nginx with Ingress configuration via Helm, changing
 
 [Instruction](https://github.com/yurakorabel/DevOps_GL_Hometask/tree/main/Task11) - how to create k8s cluster
 
+or
+
+[Instruction](https://github.com/yurakorabel/DevOps_GL_Hometask/tree/main/Task13) - how to create k8s cluster (using kubespray)
+
 ### Before starting, you need to modify the values.yaml file to suit yourself !!!
 
 <hr>
