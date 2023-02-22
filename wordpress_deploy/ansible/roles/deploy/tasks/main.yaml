@@ -1,0 +1,49 @@
+---
+- name: Install Helm via Snap
+  community.general.snap:
+    name: helm
+    classic: true
+
+- name: Create .kube directory
+  ansible.builtin.file:
+    path: .kube/  # Path to the directory to create
+    state: directory
+
+- name: Copy Kubernetes config file to local machine
+  ansible.builtin.copy:
+      remote_src: yes  # Use the remote source file
+      src: /etc/kubernetes/admin.conf  # Path to the remote file to copy
+      dest: .kube/config  # Path to the local file to create
+
+- name: Set file permissions for Kubernetes config
+  ansible.builtin.file:
+    path: .kube/config
+    mode: '0777'
+
+- name: Copy WordPress config file
+  ansible.builtin.copy:
+      src: wp-config.php  # Path to the remote file to copy
+      dest: wp-config.php  # Path to the local file to create
+      backup: yes  # Create a backup of the existing file if it exists
+
+- name: Set file permissions for WordPress config file
+  ansible.builtin.file:
+    path: wp-config.php
+    mode: '0777'
+
+- name: Copy WordPress files
+  ansible.builtin.copy:
+      src: wordpress/  # Path to the remote directory to copy
+      dest: wordpress/  # Path to the local directory to creat
+      backup: yes  # Create a backup of the existing directory if it exists
+
+- name: Set file permissions for WordPress files
+  ansible.builtin.file:
+    path: wordpress/
+    mode: '0777'
+
+- name: Install WordPress with Helm chart
+  kubernetes.core.helm:
+    name: wordpress  # Name of the Helm chart release
+    chart_ref: wordpress/  # Path to the directory containing the Helm chart
+    release_namespace: default  # Namespace to install the chart in

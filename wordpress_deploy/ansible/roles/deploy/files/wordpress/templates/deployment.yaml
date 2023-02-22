@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:               # Metadata about the object
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:                   # Specification for the Deployment
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:               # Specification for the pod
+      containers:       # The containers to run in the pod
+      - name: {{ .Release.Name }}
+        image: {{ .Values.container.image }}
+        ports:
+        - containerPort: 80
+        volumeMounts:   # The volumes to mount in the container
+        - name: {{ .Release.Name }}
+          mountPath: /var/www/html/wp-config.php
+      volumes:          # The volumes to make available to the pod
+        - name: {{ .Release.Name }}
+          hostPath:
+            path: {{ .Values.config }}
+            type: FileOrCreate
