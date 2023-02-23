@@ -1,6 +1,9 @@
 ---
-###################################################################################
-- name: Install aide
+# ---------- Package management ----------
+
+
+# ---- Install/Update packages ----
+- name: Install AIDE
   ansible.builtin.apt:
       name: aide
       state: present
@@ -12,95 +15,141 @@
       state: present
       update_cache: yes
 
-- name: Install pwquality
+- name: Install libpam-pwquality
   ansible.builtin.apt:
       name: libpam-pwquality
       state: present
       update_cache: yes
 
-- name: Install the ntp service
+- name: Install NTP
   ansible.builtin.apt:
       name: ntp
       state: present
       update_cache: yes
 
-- name: Install nftables Package
+- name: Install nftables
   ansible.builtin.apt:
       name: nftables
       state: present
       update_cache: yes
 
-- name: Uninstall rsync Package
+
+# ---- Remove packages ----
+- name: Remove rsync
   ansible.builtin.apt:
       name: rsync
       state: absent
 
-- name: Remove telnet Clients
+- name: Remove telnet
   ansible.builtin.apt:
       name: telnet
       state: absent
 
-###################################################################################
-- name: Configuration common-password
+
+# ---------- System configuration ----------
+
+# ---- Copying files ----
+# These tasks copy configuration files to the appropriate locations on the server:
+
+- name: Copy common-password file
   ansible.builtin.copy:
       src: common-password
       dest: /etc/pam.d/common-password
       backup: yes
 
-- name: Configuration sshd_config
+- name: Copy sshd_config file
   ansible.builtin.copy:
       src: sshd_config
       dest: /etc/ssh/sshd_config
       backup: yes
 
-- name: Verify Permissions on SSH Server config file
-  ansible.builtin.file:
-    path: /etc/ssh/sshd_config
-    mode: '0600'
-
-- name: Configuration pwquality.conf
+- name: Copy pwquality.conf file
   ansible.builtin.copy:
       src: pwquality.conf
       dest: /etc/security/pwquality.conf
       backup: yes
 
-- name: Configuration journald.conf
+- name: Copy journald.conf file
   ansible.builtin.copy:
       src: journald.conf
       dest: /etc/systemd/journald.conf
       backup: yes
 
-- name: ipv6
-  ansible.builtin.shell: sysctl -w net.ipv6.conf.all.accept_ra=0 && sysctl -w net.ipv6.conf.all.accept_redirects=0 && sysctl -w net.ipv6.conf.default.accept_ra=0 && sysctl -w net.ipv6.conf.default.accept_redirects=0
-
-- name: ipv4
-  ansible.builtin.shell: sysctl -w net.ipv4.conf.all.rp_filter=1 && sysctl -w net.ipv4.conf.all.secure_redirects=0 && sysctl -w net.ipv4.conf.default.rp_filter=1 && sysctl -w net.ipv4.conf.default.secure_redirects=0
-
-- name: Configuration sysctl.conf
+- name: Copy sysctl.conf file
   ansible.builtin.copy:
       src: sysctl.conf
       dest: /etc/sysctl.conf
       backup: yes
 
-- name: Configuration tmout.sh
+- name: Copy tmout.sh file
   ansible.builtin.copy:
       src: tmout.sh
       dest: /etc/profile.d/tmout.sh
       backup: yes
 
-- name: Add a line to a file /etc/pam.d/common-auth
+# ---- Setting permissions ----
+# These tasks set the correct permissions for various files and directories:
+
+- name: Set permissions for sshd_config file
+  ansible.builtin.file:
+    path: /etc/ssh/sshd_config
+    mode: '0600'
+
+- name: Verify Permissions on cron.d
+  ansible.builtin.file:
+    path: /etc/cron.d
+    mode: '0700'
+
+- name: Verify Permissions on cron.daily
+  ansible.builtin.file:
+    path: /etc/cron.daily
+    mode: '0700'
+
+- name: Verify Permissions on cron.hourly
+  ansible.builtin.file:
+    path: /etc/cron.hourly
+    mode: '0700'
+
+- name: Verify Permissions on cron.monthly
+  ansible.builtin.file:
+    path: /etc/cron.monthly
+    mode: '0700'
+
+- name: Verify Permissions on cron.weekly
+  ansible.builtin.file:
+    path: /etc/cron.weekly
+    mode: '0700'
+
+- name: Verify Permissions on crontab
+  ansible.builtin.file:
+    path: /etc/crontab
+    mode: '0600'
+
+# ---- Configuring network security ----
+# These tasks configure various network security settings:
+
+- name: Configure IPv6 security
+  ansible.builtin.shell: sysctl -w net.ipv6.conf.all.accept_ra=0 && sysctl -w net.ipv6.conf.all.accept_redirects=0 && sysctl -w net.ipv6.conf.default.accept_ra=0 && sysctl -w net.ipv6.conf.default.accept_redirects=0
+
+- name: Configure IPv4 security
+  ansible.builtin.shell: sysctl -w net.ipv4.conf.all.rp_filter=1 && sysctl -w net.ipv4.conf.all.secure_redirects=0 && sysctl -w net.ipv4.conf.default.rp_filter=1 && sysctl -w net.ipv4.conf.default.secure_redirects=0
+
+# ---- Modifying system configuration ----
+# These tasks modify various system configuration files:
+
+- name: Add authentication failure tracking to common-auth
   ansible.builtin.lineinfile:
     path: /etc/pam.d/common-auth
     line: auth required pam_tally2.so onerr=fail silent audit deny=5
     create: yes
 
-- name: Add a line to a file /etc/pam.d/common-account
+- name: Add authentication failure tracking to common-account
   ansible.builtin.lineinfile:
     path: /etc/pam.d/common-account
     line: account required pam_tally2.so
     create: yes
 
-- name: Replace a line to a file /etc/default/useradd
+- name: Set INACTIVE for useradd
   ansible.builtin.lineinfile:
     path: /etc/default/useradd
     state: present
@@ -133,36 +182,6 @@
     state: present
     regexp: 'inet_interfaces'
     line: inet_interfaces = loopback-only
-
-- name: Verify Permissions on cron.d
-  ansible.builtin.file:
-    path: /etc/cron.d
-    mode: '0700'
-
-- name: Verify Permissions on cron.daily
-  ansible.builtin.file:
-    path: /etc/cron.daily
-    mode: '0700'
-
-- name: Verify Permissions on cron.hourly
-  ansible.builtin.file:
-    path: /etc/cron.hourly
-    mode: '0700'
-
-- name: Verify Permissions on cron.monthly
-  ansible.builtin.file:
-    path: /etc/cron.monthly
-    mode: '0700'
-
-- name: Verify Permissions on cron.weekly
-  ansible.builtin.file:
-    path: /etc/cron.weekly
-    mode: '0700'
-
-- name: Verify Permissions on crontab
-  ansible.builtin.file:
-    path: /etc/crontab
-    mode: '0600'
 
 - name: Disable Core Dumps for All Users
   ansible.builtin.lineinfile:
