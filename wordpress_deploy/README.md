@@ -65,3 +65,8 @@ Go to [Free Domain](https://dynv6.com/) and add the server IP to the domain name
 Go to our website and configure WordPress
 
 ![image](https://user-images.githubusercontent.com/55669434/220909003-8370fa94-15dd-41bb-a042-1755aa019f3c.png)
+
+After configuring WordPress, we can go to the admin panel.
+
+![image](https://user-images.githubusercontent.com/55669434/220937850-35859069-618f-42bc-80eb-e7bb2214c82c.png)
+
