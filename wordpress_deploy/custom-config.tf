@@ -6,13 +6,11 @@ module "my_module" {
   #
   # This variable is used to store the credentials required to authenticate with a cloud provider's API.
   # my-credentials = "Your credentials"
-  my-credentials = "terraform/terraform-gcp.json"
   #
   # ----------- Project Settings ----------
   #
   # This variable specifies the default name of the project in which the infrastructure will be deployed.
   # project-default = "Your GCP project"
-  project-default = "circular-study-372113"
   #
   # This variable specifies the default region in which the infrastructure will be deployed.
   # region-default  = "us-west1"
@@ -24,11 +22,9 @@ module "my_module" {
   #
   # This variable specifies the SSH username that will be used to connect to a deployed instance.
   # ssh_username = "Your linux username"
-  ssh_username = "yura"
   #
   # This variable specifies the host name or IP address of the instance that will be deployed.
   # host         = "Your domain name"
-  host = "yurakorabel.dynv6.net"
   #
   # ---------- Instance Settings ----------
   #
