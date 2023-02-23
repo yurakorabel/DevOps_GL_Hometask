@@ -26,7 +26,7 @@ and enable them before proceeding with the project. Please ensure that these res
   - Enter path to your credentials file (line 8)
   - Enter your project name (line 13)
   - Enter your linux username (line 24)
-  - Enter host scr (line 27)
+  - Enter host link (line 27)
 
 ### Note 
 
@@ -70,3 +70,16 @@ After configuring WordPress, we can go to the admin panel.
 
 ![image](https://user-images.githubusercontent.com/55669434/220937850-35859069-618f-42bc-80eb-e7bb2214c82c.png)
 
+## Hardening
+
+![image](https://user-images.githubusercontent.com/55669434/220942560-66fa36e1-2528-424e-88d7-ff191a6c507f.png)
+
+![image](https://user-images.githubusercontent.com/55669434/220942842-74fc08b0-1f33-461a-9a64-496a3544cef0.png)
+
+Total	81%
+
+## [My_URL](http://yurakorabel.dynv6.net/)
+
+## Conclusion
+
+In conclusion, this project demonstrates the power and flexibility of using Terraform and Ansible to automate the deployment and hardening of a cloud infrastructure on Google Cloud Platform. With this project uses Terraform and Ansible to create a cloud infrastructure on Google Cloud Platform, including a VPC, instance, managed MySQL database, and Kubernetes cluster. It also includes hardening measures to achieve a CIS-CAT score of 81%. A playbook for deploying WordPress with the managed MySQL database is also included.
